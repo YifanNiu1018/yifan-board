@@ -1,0 +1,9 @@
+.board {
+    flex: 1;
+    background-color: #fff;
+    width: auto;
+}
+
+.board-content {
+    padding: 10px;
+}
