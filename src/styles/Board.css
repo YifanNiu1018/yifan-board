@@ -1,9 +1,28 @@
 .board {
     flex: 1;
-    background-color: #fff;
-    width: auto;
+    background-color: #e2e4e6;
+    padding: 10px;
+    overflow-x: auto;
 }
 
 .board-content {
+    display: flex;
+    align-items: flex-start;
+}
+
+.add-list {
+    background-color: #d3d3d3;
     padding: 10px;
+    margin-right: 10px;
+    width: 250px;
+    border-radius: 4px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+}
+
+.add-list:hover {
+    background-color: #c3c3c3;
 }

@@ -9,6 +9,7 @@ function Navbar() {
                 <button className="create-button">创建</button>
             </div>
             <div className="navbar-right">
+                <input type="text" className="search-box" placeholder="搜索..." />
                 <img src="user-avatar.jpg" alt="User Avatar" className="user-avatar" />
             </div>
         </nav>
