@@ -1,11 +1,11 @@
 import React from 'react';
 import '../styles/BoardNavbar.css';
 
-function BoardNavbar() {
+function BoardNavbar({ project }) {
     return (
         <nav className="board-navbar">
-            <h2>看板导航栏</h2>
-            {/* 可以在此处添加更多导航项 */}
+            <h2>{project.name} 的看板</h2>
+            {/* 这里可以添加更多与项目相关的导航内容 */}
         </nav>
     );
 }

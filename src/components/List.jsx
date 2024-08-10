@@ -2,16 +2,17 @@ import React, { useState } from 'react';
 import Card from './Card';
 import '../styles/List.css';
 
-function List({ title }) {
-    const [cards, setCards] = useState([]);
+function List({ list, updateCards }) {
     const [isAddingCard, setIsAddingCard] = useState(false);
     const [newCardText, setNewCardText] = useState('');
 
     const handleAddCard = () => {
         if (newCardText.trim()) {
-            setCards([...cards, newCardText.trim()]);
+            const newCard = { id: list.cards.length + 1, text: newCardText.trim() };
+            const updatedCards = [...list.cards, newCard];
             setNewCardText('');
             setIsAddingCard(false);
+            updateCards(updatedCards);
         }
     };
 
@@ -21,9 +22,15 @@ function List({ title }) {
         }
     };
 
-    const renderAddCardForm = () => {
-        if (isAddingCard) {
-            return (
+    return (
+        <div className="list">
+            <h3 className="list-title">{list.title}</h3>
+            <div className="cards">
+                {list.cards.map((card) => (
+                    <Card key={card.id} text={card.text} />
+                ))}
+            </div>
+            {isAddingCard ? (
                 <div className="add-card-form">
                     <input
                         type="text"
@@ -38,25 +45,11 @@ function List({ title }) {
                         <button onClick={() => setIsAddingCard(false)}>取消</button>
                     </div>
                 </div>
-            );
-        } else {
-            return (
+            ) : (
                 <button className="add-card-button" onClick={() => setIsAddingCard(true)}>
                     + 添加任务
                 </button>
-            );
-        }
-    };
-
-    return (
-        <div className="list">
-            <h3 className="list-title">{title}</h3>
-            <div className="cards">
-                {cards.map((card, index) => (
-                    <Card key={index} text={card} />
-                ))}
-            </div>
-            {renderAddCardForm()}
+            )}
         </div>
     );
 }

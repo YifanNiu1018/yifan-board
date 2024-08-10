@@ -1,24 +1,33 @@
-import React, { useState } from 'react';
-import BoardNavbar from './BoardNavbar';
+import React from 'react';
 import List from './List';
 import '../styles/Board.css';
 
-function Board() {
-    const [lists, setLists] = useState([
-        { id: 1, title: '待办事项' },
-        { id: 2, title: '进行中' },
-        { id: 3, title: '已完成' },
-    ]);
-
+function Board({ project, updateLists }) {
     const addList = () => {
-        const newList = { id: lists.length + 1, title: `新列表 ${lists.length + 1}` };
-        setLists([...lists, newList]);
+        const newList = {
+            id: project.lists.length + 1,
+            title: `${project.name} - 新列表 ${project.lists.length + 1}`,
+            cards: [], // 初始化卡片数组
+        };
+        const updatedLists = [...project.lists, newList];
+        updateLists(updatedLists);
+    };
+
+    const updateListCards = (listId, updatedCards) => {
+        const updatedLists = project.lists.map((list) =>
+            list.id === listId ? { ...list, cards: updatedCards } : list
+        );
+        updateLists(updatedLists);
     };
 
     return (
         <div className="board-content">
-            {lists.map(list => (
-                <List key={list.id} title={list.title} />
+            {project.lists.map((list) => (
+                <List
+                    key={list.id}
+                    list={list}
+                    updateCards={(updatedCards) => updateListCards(list.id, updatedCards)}
+                />
             ))}
             <div className="add-list" onClick={addList}>
                 + 添加列表
