@@ -3,6 +3,7 @@ import Navbar from './components/Navbar';
 import Sidebar from './components/Sidebar';
 import BoardNavbar from './components/BoardNavbar';
 import Board from './components/Board';
+import Login from './components/Login';
 import './App.css';
 
 // 工厂函数用于创建新项目
@@ -31,7 +32,6 @@ function createNewProject(projectName, projectId) {
 }
 
 function App() {
-  // 初始化时包含一个默认项目
   const [projects, setProjects] = useState([createNewProject('默认项目', 0)]);
   const [selectedProjectIndex, setSelectedProjectIndex] = useState(0); // 默认选中第一个项目
 
