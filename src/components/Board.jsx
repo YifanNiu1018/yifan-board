@@ -3,7 +3,7 @@ import BoardNavbar from './BoardNavbar';
 import List from './List';
 import '../styles/Board.css';
 
-export default function Board() {
+function Board() {
     const [lists, setLists] = useState([
         { id: 1, title: '待办事项' },
         { id: 2, title: '进行中' },
@@ -16,16 +16,15 @@ export default function Board() {
     };
 
     return (
-        <div className="board">
-            <BoardNavbar />
-            <div className="board-content">
-                {lists.map(list => (
-                    <List key={list.id} title={list.title} />
-                ))}
-                <div className="add-list" onClick={addList}>
-                    + 添加列表
-                </div>
+        <div className="board-content">
+            {lists.map(list => (
+                <List key={list.id} title={list.title} />
+            ))}
+            <div className="add-list" onClick={addList}>
+                + 添加列表
             </div>
         </div>
     );
 }
+
+export default Board;

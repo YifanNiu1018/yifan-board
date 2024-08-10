@@ -3,6 +3,8 @@
     padding: 10px;
     margin-right: 10px;
     width: 250px;
+    min-width: 250px;
+    /* 确保最小宽度不变 */
     border-radius: 4px;
     box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
 }
