@@ -10,23 +10,7 @@ function createNewProject(projectName, projectId) {
     return {
         name: projectName,
         id: projectId,
-        lists: [
-            {
-                id: 1,
-                title: `${projectName} - 待办事项`,
-                cards: [],
-            },
-            {
-                id: 2,
-                title: `${projectName} - 进行中`,
-                cards: [],
-            },
-            {
-                id: 3,
-                title: `${projectName} - 已完成`,
-                cards: [],
-            },
-        ],
+        lists: [],
     };
 }
 
@@ -34,8 +18,7 @@ function BoardPage() {
     const [projects, setProjects] = useState([createNewProject('默认项目', 0)]);
     const [selectedProjectIndex, setSelectedProjectIndex] = useState(0); // 默认选中第一个项目
 
-    const createProject = () => {
-        const newProjectName = `项目 ${projects.length + 1}`;
+    const createProject = (newProjectName) => {
         const newProject = createNewProject(newProjectName, projects.length);
         setProjects([...projects, newProject]);
         setSelectedProjectIndex(projects.length); // 自动选择新创建的项目

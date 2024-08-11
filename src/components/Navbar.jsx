@@ -2,19 +2,58 @@ import React, { useState } from 'react';
 import '../styles/Navbar.css';
 
 function Navbar({ onCreate }) {
-    const [isMenuOpen, setIsMenuOpen] = useState(false);
+    const [isCreating, setIsCreating] = useState(false);
+    const [newProjectName, setNewProjectName] = useState('');
 
-    const toggleMenu = () => {
-        setIsMenuOpen(!isMenuOpen);
+    const handleCreateClick = () => {
+        setIsCreating(true);
+    };
+
+    const handleInputChange = (e) => {
+        setNewProjectName(e.target.value);
+    };
+
+    const handleCreateProject = () => {
+        if (newProjectName.trim()) {
+            onCreate(newProjectName.trim());
+            setNewProjectName('');
+            setIsCreating(false);
+        }
+    };
+
+    const handleCancel = () => {
+        setNewProjectName('');
+        setIsCreating(false);
+    };
+
+    const handleKeyPress = (e) => {
+        if (e.key === 'Enter') {
+            handleCreateProject();
+        }
     };
 
     return (
         <div className="navbar">
             <div className="navbar-left">
                 <h1>项目看板</h1>
-                <button className="create-button" onClick={onCreate}>
-                    创建
-                </button>
+                {isCreating ? (
+                    <div className="create-project-form">
+                        <input
+                            type="text"
+                            value={newProjectName}
+                            onChange={handleInputChange}
+                            onKeyPress={handleKeyPress}
+                            placeholder="输入项目名称"
+                            autoFocus
+                        />
+                        <button onClick={handleCreateProject}>创建</button>
+                        <button onClick={handleCancel}>取消</button>
+                    </div>
+                ) : (
+                    <button className="create-button" onClick={handleCreateClick}>
+                        创建
+                    </button>
+                )}
             </div>
             <div className="navbar-right">
                 <input
@@ -27,14 +66,7 @@ function Navbar({ onCreate }) {
                         src="https://via.placeholder.com/40"  // 替换为实际的用户头像链接
                         alt="User Avatar"
                         className="user-avatar"
-                        onClick={toggleMenu}
                     />
-                    {isMenuOpen && (
-                        <div className="dropdown-menu">
-                            <button className="dropdown-item">更换头像</button>
-                            <button className="dropdown-item">退出登录</button>
-                        </div>
-                    )}
                 </div>
             </div>
         </div>
