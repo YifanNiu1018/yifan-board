@@ -39,3 +39,30 @@
     height: 40px;
     border-radius: 50%;
 }
+
+.dropdown-menu {
+    position: absolute;
+    right: 0;
+    top: 55px;
+    background-color: #fff;
+    color: #333;
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+    border-radius: 4px;
+    overflow: hidden;
+    width: 150px;
+    z-index: 1000;
+}
+
+.dropdown-item {
+    padding: 10px 20px;
+    width: 100%;
+    text-align: left;
+    border: none;
+    background: none;
+    cursor: pointer;
+    font-size: 14px;
+}
+
+.dropdown-item:hover {
+    background-color: #f1f1f1;
+}
