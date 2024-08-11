@@ -3,10 +3,20 @@ import '../styles/Login.css';
 
 function Login() {
     const [isRegistering, setIsRegistering] = useState(false);
+    const [username, setUsername] = useState('');
+    const [password, setPassword] = useState('');
+    const [confirmPassword, setConfirmPassword] = useState('');
 
     const toggleMode = () => {
         setIsRegistering(!isRegistering);
+        setUsername('');          // 清空用户名输入框
+        setPassword('');          // 清空密码输入框
+        setConfirmPassword('');   // 清空确认密码输入框（如果有的话）
     };
+
+    const handleUsernameChange = (e) => setUsername(e.target.value);
+    const handlePasswordChange = (e) => setPassword(e.target.value);
+    const handleConfirmPasswordChange = (e) => setConfirmPassword(e.target.value);
 
     return (
         <div className="login-container">
@@ -14,10 +24,28 @@ function Login() {
                 <div className="login-left">
                     <h2>{isRegistering ? 'Register' : 'Log In'}</h2>
                     <form>
-                        <input type="text" placeholder="User Name" className="login-input" />
-                        <input type="password" placeholder="User Password" className="login-input" />
+                        <input
+                            type="text"
+                            placeholder="User Name"
+                            className="login-input"
+                            value={username}
+                            onChange={handleUsernameChange}
+                        />
+                        <input
+                            type="password"
+                            placeholder="User Password"
+                            className="login-input"
+                            value={password}
+                            onChange={handlePasswordChange}
+                        />
                         {isRegistering && (
-                            <input type="password" placeholder="Confirm Password" className="login-input" />
+                            <input
+                                type="password"
+                                placeholder="Confirm Password"
+                                className="login-input"
+                                value={confirmPassword}
+                                onChange={handleConfirmPasswordChange}
+                            />
                         )}
                         <button type="submit" className="login-button">
                             {isRegistering ? 'Register' : 'Log In'}
