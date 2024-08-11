@@ -55,7 +55,7 @@ function App() {
 
   return (
     <div className="app">
-      <Navbar onCreate={createProject} />
+      {/* <Navbar onCreate={createProject} />
       <div className="main-content">
         <Sidebar projects={projects} onSelect={handleProjectSelect} />
         <div className="content-area">
@@ -71,7 +71,8 @@ function App() {
             </>
           )}
         </div>
-      </div>
+      </div> */}
+      <Login />
     </div>
   );
 }
