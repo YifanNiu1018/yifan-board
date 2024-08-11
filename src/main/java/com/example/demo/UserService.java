@@ -1,29 +1,36 @@
+
 package com.example.demo;
 
 import org.springframework.stereotype.Service;
 
-import java.util.*;
+import java.util.ArrayList;
+import java.util.List;
 
 @Service
 public class UserService {
 
-    private List<User> users = new ArrayList<>();
+    private final List<User> users = new ArrayList<>();
 
-    // 检查用户名是否已经存在
+    public UserService() {
+        // 添加一个默认的开发者用户
+        users.add(new User("testuser", "testpassword"));
+    }
+
     public boolean checkUsername(String username) {
         return users.stream().anyMatch(user -> user.getUsername().equals(username));
     }
 
-    // 注册新用户
-    public void registerUser(String username, String password) {
-        User user = new User();
-        user.setUsername(username);
-        user.setPassword(password);  // 注意：实际应用中应对密码进行加密处理
-        users.add(user);
+    public boolean registerUser(String username, String password) {
+        if (checkUsername(username)) {
+            return false;
+        } else {
+            users.add(new User(username, password));
+            return true;
+        }
     }
 
-    // 获取所有用户（可选）
-    public List<User> getAllUsers() {
-        return users;
+    public boolean loginUser(String username, String password) {
+        return users.stream().anyMatch(user ->
+                user.getUsername().equals(username) && user.getPassword().equals(password));
     }
 }
