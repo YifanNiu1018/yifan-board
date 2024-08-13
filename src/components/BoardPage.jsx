@@ -101,6 +101,7 @@ function BoardPage() {
                                 updateLists={(updatedLists) =>
                                     updateProjectLists(selectedProjectIndex, updatedLists)
                                 }
+                                username={username}
                             />
                         </>
                     )}

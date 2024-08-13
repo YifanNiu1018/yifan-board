@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import List from './List';
 import '../styles/Board.css';
 
-function Board({ project, updateLists }) {
+function Board({ project, updateLists, username }) {
     const [isAddingList, setIsAddingList] = useState(false);
     const [newListName, setNewListName] = useState('');
 
@@ -74,6 +74,7 @@ function Board({ project, updateLists }) {
                     key={list.id}
                     projectId={project.id}
                     list={list}
+                    username={username}
                     updateCards={(updatedCards) => updateListCards(list.id, updatedCards)}
                 />
             ))}

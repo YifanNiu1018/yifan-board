@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import Modal from './Modal';
 import '../styles/Card.css';
 
-function Card({ text, id, comments }) {
+function Card({ text, id, comments, username }) {
     const [isModalOpen, setIsModalOpen] = useState(false);
 
     const handleCardClick = () => {
@@ -22,6 +22,7 @@ function Card({ text, id, comments }) {
                 isOpen={isModalOpen}
                 onClose={handleCloseModal}
                 card={{ text, id, comments }}
+                username={username}
             />
         </>
     );

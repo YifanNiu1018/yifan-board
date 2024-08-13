@@ -75,18 +75,18 @@ function Login() {
         <div className="login-container">
             <div className="login-box">
                 <div className="login-left">
-                    <h2>{isRegistering ? 'Register' : 'Log In'}</h2>
+                    <h2>{isRegistering ? '注册' : '登录'}</h2>
                     <form onSubmit={handleSubmit}>
                         <input
                             type="text"
-                            placeholder="User Name"
+                            placeholder="用户名"
                             className="login-input"
                             value={username}
                             onChange={handleUsernameChange}
                         />
                         <input
                             type="password"
-                            placeholder="User Password"
+                            placeholder="密码"
                             className="login-input"
                             value={password}
                             onChange={handlePasswordChange}
@@ -94,27 +94,27 @@ function Login() {
                         {isRegistering && (
                             <input
                                 type="password"
-                                placeholder="Confirm Password"
+                                placeholder="确认密码"
                                 className="login-input"
                                 value={confirmPassword}
                                 onChange={handleConfirmPasswordChange}
                             />
                         )}
                         <button type="submit" className="login-button">
-                            {isRegistering ? 'Register' : 'Log In'}
+                            {isRegistering ? '注册' : '登录'}
                         </button>
                     </form>
                     <p className="register-link">
                         {isRegistering ? (
-                            <>Already have an account? <a href="#" onClick={toggleMode}>Log In</a></>
+                            <>已经有账户了? <a href="#" onClick={toggleMode}>登录</a></>
                         ) : (
-                            <>Don't have an account? <a href="#" onClick={toggleMode}>Register</a></>
+                            <>没有账户? <a href="#" onClick={toggleMode}>注册</a></>
                         )}
                     </p>
                     {message && <p>{message}</p>}
                 </div>
                 <div className="login-right">
-                    <img src="/mnt/data/image.png" alt="Login Illustration" className="login-image" />
+                    <img src="src/assets/Login.png" alt="Login Illustration" className="login-image" />
                 </div>
             </div>
         </div>

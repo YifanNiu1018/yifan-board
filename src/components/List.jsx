@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import Card from './Card';
 import '../styles/List.css';
 
-function List({ projectId, list, updateCards }) {
+function List({ projectId, list, updateCards, username }) {
     const [isAddingCard, setIsAddingCard] = useState(false);
     const [newCardText, setNewCardText] = useState('');
 
@@ -44,7 +44,7 @@ function List({ projectId, list, updateCards }) {
             <h3 className="list-title">{list.name}</h3>
             <div className="cards">
                 {list.cards.map((card) => (
-                    <Card key={card.id} text={card.text} id={card.id} comments={card.comments} />
+                    <Card key={card.id} text={card.text} id={card.id} comments={card.comments} username={username} />
                 ))}
             </div>
             {isAddingCard ? (
