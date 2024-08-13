@@ -25,7 +25,6 @@ public class FileUploadController {
                 File dest = new File(filePath);
                 file.transferTo(dest);
 
-                // 返回文件的访问路径，而不是文件系统路径
                 String fileUrl = "/uploads/" + fileName;
                 response.put("message", "File uploaded successfully");
                 response.put("filePath", fileUrl); // 返回相对URL路径

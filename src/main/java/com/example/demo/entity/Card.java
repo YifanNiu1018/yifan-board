@@ -5,7 +5,7 @@ import java.util.List;
 public class Card {
     private int id;
     private String text;
-    private List<String> comments; // 新增 comments 字段
+    private List<String> comments;
 
     // Getters and Setters
     public int getId() {

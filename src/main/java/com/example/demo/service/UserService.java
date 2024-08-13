@@ -12,11 +12,6 @@ public class UserService {
 
     private final List<User> users = new ArrayList<>();
 
-    public UserService() {
-        // 添加一个默认的开发者用户
-        users.add(new User("testuser", "testpassword"));
-    }
-
     public boolean checkUsername(String username) {
         return users.stream().anyMatch(user -> user.getUsername().equals(username));
     }
