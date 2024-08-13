@@ -1,9 +1,9 @@
-import React, { useState } from 'react';
+import React from 'react';
 import '../styles/Navbar.css';
 
-function Navbar({ onCreate }) {
-    const [isCreating, setIsCreating] = useState(false);
-    const [newProjectName, setNewProjectName] = useState('');
+function Navbar({ username, onCreate, onLogout }) {
+    const [isCreating, setIsCreating] = React.useState(false);
+    const [newProjectName, setNewProjectName] = React.useState('');
 
     const handleCreateClick = () => {
         setIsCreating(true);
@@ -61,13 +61,8 @@ function Navbar({ onCreate }) {
                     className="search-box"
                     placeholder="搜索..."
                 />
-                <div className="avatar-container">
-                    <img
-                        src="https://via.placeholder.com/40"  // 替换为实际的用户头像链接
-                        alt="User Avatar"
-                        className="user-avatar"
-                    />
-                </div>
+                <span className="username">{username}</span>
+                <button className="logout-button" onClick={onLogout}>退出</button>
             </div>
         </div>
     );

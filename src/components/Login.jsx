@@ -40,6 +40,8 @@ function Login() {
                     setMessage('Registration successful!');
                 } else if (result === "1") {
                     setMessage('Username already exists!');
+                } else if (result === "2") {
+                    setMessage('用户名或密码不符合要求！')
                 }
             } catch (error) {
                 console.error('Error during registration:', error);
@@ -58,7 +60,7 @@ function Login() {
 
                 const result = await response.text();
                 if (result === "0") {
-                    navigate('/board');  // 登录成功后导航到看板页面
+                    navigate('/board', { state: { username } });  // 登录成功后导航到看板页面
                 } else {
                     setMessage('Invalid username or password');
                 }
@@ -67,13 +69,6 @@ function Login() {
                 setMessage('An error occurred during login.');
             }
         }
-    };
-
-    // 开发者登录逻辑
-    const handleDeveloperLogin = () => {
-        setUsername('testuser');
-        setPassword('testpassword');
-        handleSubmit(new Event('submit'));  // 模拟表单提交
     };
 
     return (
@@ -117,12 +112,6 @@ function Login() {
                         )}
                     </p>
                     {message && <p>{message}</p>}
-                    {/* 开发者登录按钮 */}
-                    {!isRegistering && (
-                        <button onClick={handleDeveloperLogin} className="developer-login-button">
-                            Developer Login
-                        </button>
-                    )}
                 </div>
                 <div className="login-right">
                     <img src="/mnt/data/image.png" alt="Login Illustration" className="login-image" />

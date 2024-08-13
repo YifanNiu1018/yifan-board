@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react';
+import { useNavigate, useLocation } from 'react-router-dom';
 import Navbar from './Navbar';
 import Sidebar from './Sidebar';
 import BoardNavbar from './BoardNavbar';
@@ -15,6 +16,9 @@ function createNewProject(projectName, projectId) {
 }
 
 function BoardPage() {
+    const location = useLocation();
+    const username = location.state?.username || 'Guest';  // 接收传递的 username
+    const navigate = useNavigate();
     const [projects, setProjects] = useState([]);
     const [selectedProjectIndex, setSelectedProjectIndex] = useState(0);
 
@@ -78,10 +82,14 @@ function BoardPage() {
                 console.error("更新项目列表时出错：", error);
             });
     };
+    // 处理退出逻辑
+    const handleLogout = () => {
+        navigate('/login');  // 重定向到登录页面
+    };
 
     return (
         <div className="board-page">
-            <Navbar onCreate={createProject} />
+            <Navbar username={username} onCreate={createProject} onLogout={handleLogout} />
             <div className="main-content">
                 <Sidebar projects={projects} onSelect={handleProjectSelect} />
                 <div className="content-area">
