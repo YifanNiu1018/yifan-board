@@ -96,7 +96,7 @@ function Login() {
         <div className="login-container">
             <div className="login-box">
                 <div className="login-left">
-                    <h2>{isRegistering ? '注册' : '登录'}</h2>
+                    <h2>{isRegistering ? '看板注册' : '看板登录'}</h2>
                     <form onSubmit={handleSubmit}>
                         <input
                             type="text"
