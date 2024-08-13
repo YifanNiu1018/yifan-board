@@ -1,7 +1,7 @@
 import React from 'react';
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import Login from './components/Login';
-import BoardPage from './components/BoardPage'; // 引入BoardPage组件
+import BoardPage from './components/BoardPage';
 import './App.css';
 
 function App() {

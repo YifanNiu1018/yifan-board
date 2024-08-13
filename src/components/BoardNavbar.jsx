@@ -10,7 +10,6 @@ function BoardNavbar({ project }) {
     return (
         <nav className="board-navbar">
             <h2>{project.name}</h2>
-            {/* 这里可以添加更多与项目相关的导航内容 */}
         </nav>
     );
 }
