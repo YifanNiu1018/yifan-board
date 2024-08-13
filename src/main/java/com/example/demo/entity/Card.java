@@ -1,19 +1,10 @@
 package com.example.demo.entity;
 
 public class Card {
-    private String name;
     private int id;
-    private String description;
+    private String text;
 
     // Getters and Setters
-    public String getName() {
-        return name;
-    }
-
-    public void setName(String name) {
-        this.name = name;
-    }
-
     public int getId() {
         return id;
     }
@@ -22,11 +13,11 @@ public class Card {
         this.id = id;
     }
 
-    public String getDescription() {
-        return description;
+    public String getText() {
+        return text;
     }
 
-    public void setDescription(String description) {
-        this.description = description;
+    public void setText(String text) {
+        this.text = text;
     }
 }

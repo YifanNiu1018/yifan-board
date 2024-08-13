@@ -56,7 +56,8 @@ public class BoardController {
     }
 
     // 更新列表中的卡片
-    @PutMapping("/lists/{projectId}/{listId}")
+
+    @PutMapping("/{projectId}/lists/{listId}")
     public Project updateListCards(@PathVariable int projectId, @PathVariable int listId, @RequestBody List<Card> updatedCards) {
         for (Project project : projects) {
             if (project.getId() == projectId) {
