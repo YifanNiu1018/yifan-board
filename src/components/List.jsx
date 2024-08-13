@@ -12,7 +12,7 @@ function List({ projectId, list, updateCards }) {
             const updatedCards = [...list.cards, newCard];
             setNewCardText('');
             setIsAddingCard(false);
-            saveCardsToBackend(updatedCards);
+            saveCardsToBackend(updatedCards); // 将更新后的卡片列表保存到后端
         }
     };
 
@@ -23,7 +23,7 @@ function List({ projectId, list, updateCards }) {
     };
 
     const saveCardsToBackend = (updatedCards) => {
-        fetch(`http://localhost:8080/api/lists/${projectId}/${list.id}`, {
+        fetch(`http://localhost:8080/api/projects/${projectId}/lists/${list.id}`, {
             method: "PUT",
             headers: {
                 "Content-Type": "application/json"
@@ -32,7 +32,7 @@ function List({ projectId, list, updateCards }) {
         })
             .then(response => response.json())
             .then(data => {
-                updateCards(data.lists.find(l => l.id === list.id).cards);
+                updateCards(data.lists.find(l => l.id === list.id).cards); // 更新前端状态
             })
             .catch(error => {
                 console.error("更新任务列表时出错：", error);
