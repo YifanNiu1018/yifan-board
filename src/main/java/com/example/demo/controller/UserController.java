@@ -16,6 +16,11 @@ public class UserController {
 
     @PostMapping("/register")
     public ResponseEntity<String> register(@RequestBody User user) {
+        if (user.getUsername() == null || user.getUsername().trim().isEmpty() ||
+                user.getPassword() == null || user.getPassword().trim().isEmpty()) {
+            return ResponseEntity.ok("2");  // 用户名或密码为空
+        }
+
         boolean success = userService.registerUser(user.getUsername(), user.getPassword());
         if (success) {
             return ResponseEntity.ok("0");  // 注册成功
@@ -26,6 +31,11 @@ public class UserController {
 
     @PostMapping("/login")
     public ResponseEntity<String> login(@RequestBody User user) {
+        if (user.getUsername() == null || user.getUsername().trim().isEmpty() ||
+                user.getPassword() == null || user.getPassword().trim().isEmpty()) {
+            return ResponseEntity.ok("1");  // 用户名或密码为空
+        }
+
         boolean success = userService.loginUser(user.getUsername(), user.getPassword());
         if (success) {
             return ResponseEntity.ok("0");  // 登录成功
