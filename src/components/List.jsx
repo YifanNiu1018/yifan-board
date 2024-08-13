@@ -44,7 +44,7 @@ function List({ projectId, list, updateCards }) {
             <h3 className="list-title">{list.name}</h3>
             <div className="cards">
                 {list.cards.map((card) => (
-                    <Card key={card.id} text={card.text} />
+                    <Card key={card.id} text={card.text} id={card.id} comments={card.comments} />
                 ))}
             </div>
             {isAddingCard ? (

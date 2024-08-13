@@ -1,7 +1,15 @@
 .card {
-    background-color: #fff;
-    margin-bottom: 5px;
     padding: 10px;
+    margin: 5px 0;
+    background-color: #fff;
     border-radius: 4px;
     box-shadow: 0 1px 3px rgba(0, 0, 0, 0.2);
+    cursor: pointer;
+    /* 添加这行，设置光标为手形 */
+    transition: box-shadow 0.3s ease;
+}
+
+.card:hover {
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.3);
+    /* 可选：添加悬停效果 */
 }
