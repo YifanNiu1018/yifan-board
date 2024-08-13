@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import Card from './Card';
 import '../styles/List.css';
 
-function List({ list, updateCards }) {
+function List({ projectId, list, updateCards }) {
     const [isAddingCard, setIsAddingCard] = useState(false);
     const [newCardText, setNewCardText] = useState('');
 
@@ -12,7 +12,7 @@ function List({ list, updateCards }) {
             const updatedCards = [...list.cards, newCard];
             setNewCardText('');
             setIsAddingCard(false);
-            updateCards(updatedCards);
+            saveCardsToBackend(updatedCards);
         }
     };
 
@@ -22,9 +22,26 @@ function List({ list, updateCards }) {
         }
     };
 
+    const saveCardsToBackend = (updatedCards) => {
+        fetch(`http://localhost:8080/api/lists/${projectId}/${list.id}`, {
+            method: "PUT",
+            headers: {
+                "Content-Type": "application/json"
+            },
+            body: JSON.stringify(updatedCards)
+        })
+            .then(response => response.json())
+            .then(data => {
+                updateCards(data.lists.find(l => l.id === list.id).cards);
+            })
+            .catch(error => {
+                console.error("更新任务列表时出错：", error);
+            });
+    };
+
     return (
         <div className="list">
-            <h3 className="list-title">{list.title}</h3>
+            <h3 className="list-title">{list.name}</h3>
             <div className="cards">
                 {list.cards.map((card) => (
                     <Card key={card.id} text={card.text} />

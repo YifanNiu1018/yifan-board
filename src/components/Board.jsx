@@ -6,6 +6,11 @@ function Board({ project, updateLists }) {
     const [isAddingList, setIsAddingList] = useState(false);
     const [newListName, setNewListName] = useState('');
 
+    // 确保 project 和 project.lists 存在
+    if (!project || !project.lists) {
+        return <div className="board-content">加载中...</div>;
+    }
+
     const handleAddListClick = () => {
         setIsAddingList(true);
     };
@@ -18,13 +23,29 @@ function Board({ project, updateLists }) {
         if (newListName.trim()) {
             const newList = {
                 id: project.lists.length + 1,
-                title: newListName.trim(),
+                name: newListName.trim(), // 确保传递了 title
                 cards: [], // 初始化卡片数组
             };
             const updatedLists = [...project.lists, newList];
-            updateLists(updatedLists);
-            setNewListName('');
-            setIsAddingList(false);
+
+            // 调用后端API保存新List
+            fetch(`http://localhost:8080/api/projects/${project.id}/lists`, {
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/json"
+                },
+                body: JSON.stringify(newList)
+            })
+                .then(response => response.json())
+                .then(data => {
+                    // 更新前端状态并重置输入框
+                    updateLists(data.lists); // 使用后端返回的最新数据更新状态
+                    setNewListName('');
+                    setIsAddingList(false);
+                })
+                .catch(error => {
+                    console.error("创建新列表时出错：", error);
+                });
         }
     };
 
@@ -51,6 +72,7 @@ function Board({ project, updateLists }) {
             {project.lists.map((list) => (
                 <List
                     key={list.id}
+                    projectId={project.id}
                     list={list}
                     updateCards={(updatedCards) => updateListCards(list.id, updatedCards)}
                 />
@@ -62,8 +84,8 @@ function Board({ project, updateLists }) {
                         value={newListName}
                         onChange={handleInputChange}
                         onKeyPress={handleKeyPress}
-                        placeholder="输入列表名称"
                         autoFocus
+                        placeholder="输入列表名称"
                     />
                     <div className="form-actions">
                         <button onClick={handleAddList}>创建</button>
