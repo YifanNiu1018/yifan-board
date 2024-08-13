@@ -8,8 +8,8 @@ function Login() {
     const [password, setPassword] = useState('');
     const [confirmPassword, setConfirmPassword] = useState('');
     const [message, setMessage] = useState('');
-
-    const navigate = useNavigate();  // 初始化 useNavigate
+    const [passwordError, setPasswordError] = useState('');  // 用于存储密码错误信息
+    const navigate = useNavigate();
 
     const toggleMode = () => {
         setIsRegistering(!isRegistering);
@@ -17,15 +17,36 @@ function Login() {
         setPassword('');
         setConfirmPassword('');
         setMessage('');
+        setPasswordError('');
     };
 
     const handleUsernameChange = (e) => setUsername(e.target.value);
-    const handlePasswordChange = (e) => setPassword(e.target.value);
-    const handleConfirmPasswordChange = (e) => setConfirmPassword(e.target.value);
+
+    const handlePasswordChange = (e) => {
+        setPassword(e.target.value);
+        if (isRegistering && confirmPassword && e.target.value !== confirmPassword) {
+            setPasswordError('密码不一样！');
+        } else {
+            setPasswordError('');
+        }
+    };
+
+    const handleConfirmPasswordChange = (e) => {
+        setConfirmPassword(e.target.value);
+        if (password && e.target.value !== password) {
+            setPasswordError('密码不一样！');
+        } else {
+            setPasswordError('');
+        }
+    };
 
     const handleSubmit = async (e) => {
         e.preventDefault();
         if (isRegistering) {
+            if (password !== confirmPassword) {
+                setPasswordError('密码不一样！');
+                return;
+            }
             try {
                 const response = await fetch('http://localhost:8080/api/register', {
                     method: 'POST',
@@ -35,17 +56,17 @@ function Login() {
                     body: JSON.stringify({ username, password }),
                 });
 
-                const result = await response.text();  // 获取文本数据
+                const result = await response.text();
                 if (result === "0") {
-                    setMessage('Registration successful!');
+                    setMessage('注册成功！');
                 } else if (result === "1") {
-                    setMessage('Username already exists!');
+                    setMessage('用户名已存在！');
                 } else if (result === "2") {
-                    setMessage('用户名或密码不符合要求！')
+                    setMessage('用户名或密码不符合要求！');
                 }
             } catch (error) {
-                console.error('Error during registration:', error);
-                setMessage('An error occurred during registration.');
+                console.error('注册时出错:', error);
+                setMessage('注册时发生错误。');
             }
         } else {
             // 登录逻辑
@@ -60,13 +81,13 @@ function Login() {
 
                 const result = await response.text();
                 if (result === "0") {
-                    navigate('/board', { state: { username } });  // 登录成功后导航到看板页面
+                    navigate('/board', { state: { username } });
                 } else {
-                    setMessage('Invalid username or password');
+                    setMessage('无效的用户名或密码');
                 }
             } catch (error) {
-                console.error('Error during login:', error);
-                setMessage('An error occurred during login.');
+                console.error('登录时出错:', error);
+                setMessage('登录时发生错误。');
             }
         }
     };
@@ -100,7 +121,8 @@ function Login() {
                                 onChange={handleConfirmPasswordChange}
                             />
                         )}
-                        <button type="submit" className="login-button">
+                        {passwordError && <p className="error-message">{passwordError}</p>}
+                        <button type="submit" className="login-button" disabled={isRegistering && passwordError}>
                             {isRegistering ? '注册' : '登录'}
                         </button>
                     </form>

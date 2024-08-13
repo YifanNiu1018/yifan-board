@@ -16,5 +16,13 @@
 }
 
 .sidebar li:hover {
+    background-color: #ccc;
+}
+
+/* 添加的选中样式 */
+.sidebar li.selected {
     background-color: #ddd;
+    font-weight: bold;
+    border-left: 4px solid #007bff;
+    /* 添加左侧边框以突出显示 */
 }

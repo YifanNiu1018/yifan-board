@@ -8,14 +8,14 @@
 }
 
 .add-list {
-    background-color: #d3d3d3;
+    background-color: #e2e4e6;
     padding: 10px;
     margin-right: 10px;
     width: 250px;
     border-radius: 4px;
     display: flex;
     align-items: center;
-    justify-content: center;
+    justify-content: left;
     cursor: pointer;
     box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
     flex-shrink: 0;
@@ -27,14 +27,11 @@
 }
 
 .add-list-form {
-    background-color: #d3d3d3;
+    background-color: #f4f4f4;
     padding: 10px;
     margin-right: 10px;
     width: 250px;
     border-radius: 4px;
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
     box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
     flex-shrink: 0;
 }
@@ -43,17 +40,42 @@
     padding: 5px;
     font-size: 14px;
     border-radius: 4px;
-    border: 1px solid #ccc;
-    width: 150px;
+    border: none;
+    width: 100%;
+    margin-bottom: 10px;
+    box-sizing: border-box;
+    background-color: #f4f4f4;
+    outline: none;
+    transition: box-shadow 0.3s ease;
+    /* 添加过渡效果 */
 }
+
+/* .add-list-form input:focus {
+    box-shadow: 0 0 5px rgba(0, 123, 255, 0.5);
+} */
 
 .form-actions {
     display: flex;
-    gap: 5px;
+    justify-content: space-between;
+    /* 使按钮在行内左右对齐 */
+    gap: 10px;
+    flex-direction: row;
+    /* 将按钮设置为横向排列 */
 }
 
 .form-actions button {
+    flex: 1;
     padding: 5px 10px;
     font-size: 14px;
     cursor: pointer;
+    border-radius: 4px;
+    border: none;
+    background-color: #0099ff;
+    /* 默认按钮背景颜色 */
+    color: white;
+    transition: background-color 0.3s ease;
+}
+
+.form-actions button:hover {
+    background-color: #0067d5;
 }

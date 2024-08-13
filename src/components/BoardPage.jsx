@@ -86,12 +86,23 @@ function BoardPage() {
     const handleLogout = () => {
         navigate('/login');  // 重定向到登录页面
     };
+    // 搜索项目
+    const handleSearch = (searchTerm) => {
+        const projectIndex = projects.findIndex(project =>
+            project.name.toLowerCase() === searchTerm.toLowerCase()
+        );
+        if (projectIndex !== -1) {
+            handleProjectSelect(projectIndex);
+        } else {
+            alert('未找到对应的项目');
+        }
+    };
 
     return (
         <div className="board-page">
-            <Navbar username={username} onCreate={createProject} onLogout={handleLogout} />
+            <Navbar username={username} onCreate={createProject} onLogout={handleLogout} onSearch={handleSearch} />
             <div className="main-content">
-                <Sidebar projects={projects} onSelect={handleProjectSelect} />
+                <Sidebar projects={projects} onSelect={handleProjectSelect} selectedProjectIndex={selectedProjectIndex} />
                 <div className="content-area">
                     {selectedProjectIndex !== null && (
                         <>

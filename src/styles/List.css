@@ -4,7 +4,6 @@
     margin-right: 10px;
     width: 250px;
     min-width: 250px;
-    /* 确保最小宽度不变 */
     border-radius: 4px;
     box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
 }
@@ -12,4 +11,55 @@
 .list-title {
     font-size: 16px;
     margin-bottom: 10px;
+    font-weight: bold;
+    color: #333;
+}
+
+.add-card-button {
+    display: block;
+    width: 100%;
+    padding: 8px 10px;
+    margin-top: 10px;
+    background-color: #0099ff;
+    color: white;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 14px;
+    text-align: left;
+    transition: background-color 0.3s ease;
+}
+
+.add-card-button:hover {
+    background-color: #0067d5;
+}
+
+.add-card-form {
+    margin-top: 10px;
+}
+
+.add-card-form input {
+    width: 100%;
+    padding: 10px;
+    font-size: 14px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    margin-bottom: 10px;
+    box-sizing: border-box;
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.2);
+    outline: none;
+}
+
+.form-actions {
+    display: flex;
+    justify-content: space-between;
+}
+
+.form-actions button {
+    padding: 8px 12px;
+    font-size: 14px;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
 }

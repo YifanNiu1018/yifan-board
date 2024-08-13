@@ -1,9 +1,10 @@
 import React from 'react';
 import '../styles/Navbar.css';
 
-function Navbar({ username, onCreate, onLogout }) {
+function Navbar({ username, onCreate, onLogout, onSearch }) {
     const [isCreating, setIsCreating] = React.useState(false);
     const [newProjectName, setNewProjectName] = React.useState('');
+    const [searchTerm, setSearchTerm] = React.useState(''); // 添加搜索框的状态
 
     const handleCreateClick = () => {
         setIsCreating(true);
@@ -11,6 +12,10 @@ function Navbar({ username, onCreate, onLogout }) {
 
     const handleInputChange = (e) => {
         setNewProjectName(e.target.value);
+    };
+
+    const handleSearchChange = (e) => {
+        setSearchTerm(e.target.value);
     };
 
     const handleCreateProject = () => {
@@ -29,6 +34,12 @@ function Navbar({ username, onCreate, onLogout }) {
     const handleKeyPress = (e) => {
         if (e.key === 'Enter') {
             handleCreateProject();
+        }
+    };
+
+    const handleSearchKeyPress = (e) => {
+        if (e.key === 'Enter') {
+            onSearch(searchTerm);  // 调用传递的 onSearch 回调函数
         }
     };
 
@@ -60,6 +71,9 @@ function Navbar({ username, onCreate, onLogout }) {
                     type="text"
                     className="search-box"
                     placeholder="搜索..."
+                    value={searchTerm}
+                    onChange={handleSearchChange}
+                    onKeyPress={handleSearchKeyPress}
                 />
                 <span className="username">{username}</span>
                 <button className="logout-button" onClick={onLogout}>退出</button>
