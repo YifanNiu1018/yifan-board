@@ -71,4 +71,19 @@ public class BoardController {
         }
         return null;
     }
+
+    @PutMapping("/cards/{cardId}/comments")
+    public Card updateCardComments(@PathVariable int cardId, @RequestBody List<String> comments) {
+        for (Project project : projects) {
+            for (ProjectList list : project.getLists()) {
+                for (Card card : list.getCards()) {
+                    if (card.getId() == cardId) {
+                        card.setComments(comments);
+                        return card;
+                    }
+                }
+            }
+        }
+        return null;
+    }
 }
