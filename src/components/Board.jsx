@@ -8,7 +8,7 @@ function Board({ project, updateLists, username }) {
 
     // 确保 project 和 project.lists 存在
     if (!project || !project.lists) {
-        return <div className="board-content">加载中...</div>;
+        return <div className="board-content"></div>;
     }
 
     const handleAddListClick = () => {
@@ -23,7 +23,7 @@ function Board({ project, updateLists, username }) {
         if (newListName.trim()) {
             const newList = {
                 id: project.lists.length + 1,
-                name: newListName.trim(), // 确保传递了 title
+                name: newListName.trim(),
                 cards: [], // 初始化卡片数组
             };
             const updatedLists = [...project.lists, newList];
