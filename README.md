@@ -1,0 +1,1 @@
+助教老师好！项目打包成了jar包，JAVA版本21.如果jar包运行出现问题可以用npm run dev运行前端页面，并同时运行后端的BackendApplication文件。
